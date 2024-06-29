@@ -5,5 +5,6 @@ import math
 
 from torch.autograd import Variable
 
+
 class Embeddings(nn.Module):
-    
+    print("Hi")
