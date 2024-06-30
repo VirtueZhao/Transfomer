@@ -48,30 +48,30 @@ class PositionalEncoding(nn.Module):
         return self.dropout(x)
 
 
-d_model = 512
-vocab = 1000
+# d_model = 512
+# vocab = 1000
 
-x = Variable(torch.LongTensor([[100, 2, 421, 508], [491, 998, 1, 221]]))
+# x = Variable(torch.LongTensor([[100, 2, 421, 508], [491, 998, 1, 221]]))
 
-emb = Embeddings(vocab, d_model)
-embr = emb(x)
+# emb = Embeddings(vocab, d_model)
+# embr = emb(x)
 # print(embr)
 # print(x.shape)
 # print(embr.shape)
 
-dropout = 0.1
-max_len = 60
+# dropout = 0.1
+# max_len = 60
 
-pe = PositionalEncoding(d_model, dropout, max_len)
-pe_result = pe(embr)
+# pe = PositionalEncoding(d_model, dropout, max_len)
+# pe_result = pe(embr)
 # print(pe_result)
 # print(pe_result.shape)
 
 # Visualize Positional Embedding
-plt.figure(figsize=(15, 5))
-pe = PositionalEncoding(20, 0)
-y = pe(Variable(torch.zeros(1, 100, 20)))
-print(y.shape)
-plt.plot(np.arange(100), y[0, :, 4:8].data.numpy())
-plt.legend(["dim %d" % p for p in [4, 5, 6, 7]])
-plt.savefig("visualization.png")
+# plt.figure(figsize=(15, 5))
+# pe = PositionalEncoding(20, 0)
+# y = pe(Variable(torch.zeros(1, 100, 20)))
+# print(y.shape)
+# plt.plot(np.arange(100), y[0, :, 4:8].data.numpy())
+# plt.legend(["dim %d" % p for p in [4, 5, 6, 7]])
+# plt.savefig("visualization_positional_embedding.png")
