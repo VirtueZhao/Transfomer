@@ -1,7 +1,7 @@
 import math
 
-import matplotlib.pyplot as plt
-import numpy as np
+import matplotlib.pyplot as plt  # noqa
+import numpy as np  # noqa
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
