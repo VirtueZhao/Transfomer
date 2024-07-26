@@ -43,14 +43,14 @@ axes[0, 0].legend(handles=legend_elements, loc='lower right')
 
 # Covariate Shift Plot
 # Simulate covariate shift by adding some noise
-# class_1_shifted = class_1 + np.random.normal(0, 0.5, class_1.shape)
-# class_2_shifted = class_2 + np.random.normal(0, 0.5, class_2.shape)
+s_class_1_covariate = s_class_1 + np.random.normal(0, 1, s_class_1.shape)
+s_class_2_covariate = s_class_2 + np.random.normal(0, 1, s_class_2.shape)
 axes[0, 1].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
 axes[0, 1].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
 axes[0, 1].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
 axes[0, 1].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
-# axes[1].scatter(class_1_shifted[:, 0], class_1_shifted[:, 1], marker='x', color='pink', label='Class 1 (Covariate Shift)')
-# axes[1].scatter(class_2_shifted[:, 0], class_2_shifted[:, 1], marker='x', color='purple', label='Class 2 (Covariate Shift)')
+axes[0, 1].scatter(s_class_1_covariate[:, 0], s_class_1_covariate[:, 1], marker='x', color='red', label='Class 1 (Covariate Shift)')
+axes[0, 1].scatter(s_class_2_covariate[:, 0], s_class_2_covariate[:, 1], marker='x', color='blue', label='Class 2 (Covariate Shift)')
 axes[0, 1].set_title('Covariate Shift Augmentation')
 axes[0, 1].legend(handles=legend_elements, loc='lower right')
 
