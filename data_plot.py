@@ -9,20 +9,21 @@ fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 np.random.seed(42)
 
 # Source Data Plot
-s_class_1 = np.random.multivariate_normal([2, 2], [[1, 0], [0, 1]], 100)
-s_class_2 = np.random.multivariate_normal([-2, -2], [[1, 0], [0, 1]], 100)
-axes[0].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='x', label='Class 1 (Source)')
-axes[0].scatter(s_class_2[:, 0], s_class_2[:, 1], colorcle='blue', marker='x', label='Class 2 (Source)')
+s_class_1 = np.random.multivariate_normal([2, 2], [[1, 0], [0, 1]], 50)
+s_class_2 = np.random.multivariate_normal([-2, -2], [[1, 0], [0, 1]], 50)
+axes[0].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
+axes[0].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
 
-# t_class_1 = s_class_1 + [5, 0]
-# t_class_2 = s_class_2 + [5, 0]
-# axes[0].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='x', label='Class 1 (Target)')
-# axes[0].scatter(t_class_2[:, 0], t_class_2[:, 1], color='red', marker='+', label='Class 2 (Target)')
+t_class_1 = s_class_1 + [5, 0]
+t_class_2 = s_class_2 + [5, 0]
+axes[0].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='x', label='Class 1 (Target)')
+axes[0].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='x', label='Class 2 (Target)')
 
 # Plot Decision Boundary
 x = np.vstack((s_class_1, s_class_2))
-y = np.hstack((np.ones(100), np.zeros(100)))
+y = np.hstack((np.ones(50), np.zeros(50)))
 svm = SVC(kernel='linear').fit(x, y)
+
 x_min, x_max = x[:, 0].min() - 1, x[:, 0].max() + 1
 y_min, y_max = x[:, 1].min() - 1, x[:, 1].max() + 1
 xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1),
