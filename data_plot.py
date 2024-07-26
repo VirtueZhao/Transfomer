@@ -13,11 +13,12 @@ fig, axes = plt.subplots(2, 2, figsize=(12, 12))
 np.random.seed(0)
 s_class_1 = np.random.multivariate_normal([2, 2], [[1, 0], [0, 1]], num_data)
 s_class_2 = np.random.multivariate_normal([-2, -2], [[1, 0], [0, 1]], num_data)
-axes[0, 0].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
-axes[0, 0].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
 np.random.seed(42)
 t_class_1 = np.random.multivariate_normal([2, 2], [[1, 0], [0, 1]], num_data) + [6, 1]
 t_class_2 = np.random.multivariate_normal([-2, -2], [[1, 0], [0, 1]], num_data) + [8, -2]
+
+axes[0, 0].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
+axes[0, 0].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
 axes[0, 0].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
 axes[0, 0].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
 # Plot Decision Boundary
@@ -44,23 +45,35 @@ axes[0, 0].legend(handles=legend_elements, loc='lower right')
 # Simulate covariate shift by adding some noise
 # class_1_shifted = class_1 + np.random.normal(0, 0.5, class_1.shape)
 # class_2_shifted = class_2 + np.random.normal(0, 0.5, class_2.shape)
-# axes[1].scatter(class_1[:, 0], class_1[:, 1], color='orange', marker='x', label='Class 1 (Source)')
-# axes[1].scatter(class_2[:, 0], class_2[:, 1], color='red', marker='x', label='Class 2 (Source)')
+axes[0, 1].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
+axes[0, 1].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
+axes[0, 1].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
+axes[0, 1].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
 # axes[1].scatter(class_1_shifted[:, 0], class_1_shifted[:, 1], marker='x', color='pink', label='Class 1 (Covariate Shift)')
 # axes[1].scatter(class_2_shifted[:, 0], class_2_shifted[:, 1], marker='x', color='purple', label='Class 2 (Covariate Shift)')
-# axes[1].set_title('Covariate Shift')
-# axes[1].legend()
+axes[0, 1].set_title('Covariate Shift Augmentation')
+axes[0, 1].legend(handles=legend_elements, loc='lower right')
 
 # Conditional Distribution Shift Plot
 # Simulate conditional distribution shift by shifting means
 # class_1_cond_shift = class_1 + [1.5, 1.5]
 # class_2_cond_shift = class_2 + [-1.5, -1.5]
-# axes[2].scatter(class_1[:, 0], class_1[:, 1], color='orange', marker='x', label='Class 1 (Source)')
-# axes[2].scatter(class_2[:, 0], class_2[:, 1], color='red', marker='x', label='Class 2 (Source)')
+axes[1, 0].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
+axes[1, 0].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
+axes[1, 0].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
+axes[1, 0].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
 # axes[2].scatter(class_1_cond_shift[:, 0], class_1_cond_shift[:, 1], color='pink', marker='x', label='Class 1 (Conditional Shift)')
 # axes[2].scatter(class_2_cond_shift[:, 0], class_2_cond_shift[:, 1], color='purple', marker='x', label='Class 2 (Conditional Shift)')
-# axes[2].set_title('Conditional Distribution Shift')
-# axes[2].legend()
+axes[1, 0].set_title('Conditional Distribution Shift Augmentation')
+axes[1, 0].legend(handles=legend_elements, loc='lower right')
+
+# Covariate and Conditional Distribution Shift
+axes[1, 1].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
+axes[1, 1].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
+axes[1, 1].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
+axes[1, 1].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
+axes[1, 1].set_title('Dual Augmentation')
+axes[1, 1].legend(handles=legend_elements, loc='lower right')
 
 plt.show()
 plt.savefig("plot.png")
