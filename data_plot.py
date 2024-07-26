@@ -51,6 +51,17 @@ axes[0, 1].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', la
 axes[0, 1].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
 axes[0, 1].scatter(s_class_1_covariate[:, 0], s_class_1_covariate[:, 1], marker='x', color='red', label='Class 1 (Covariate Shift)')
 axes[0, 1].scatter(s_class_2_covariate[:, 0], s_class_2_covariate[:, 1], marker='x', color='blue', label='Class 2 (Covariate Shift)')
+
+x = np.vstack((s_class_1, s_class_1_covariate, s_class_2, s_class_2_covariate))
+y = np.hstack((np.ones(num_data * 2), np.zeros(num_data * 2)))
+clf = LogisticRegression()
+clf.fit(x, y)
+all_data = np.vstack((s_class_1, s_class_1_covariate, s_class_2, s_class_2_covariate, t_class_1, t_class_2))
+x_min, x_max = all_data[:, 0].min() - 1, all_data[:, 0].max() + 1
+y_min, y_max = all_data[:, 1].min() - 1, all_data[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1), np.arange(y_min, y_max, 0.1))
+z = clf.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+axes[0, 1].contourf(xx, yy, z, alpha=0.3, cmap=plt.cm.Paired)
 axes[0, 1].set_title('Covariate Shift Augmentation')
 axes[0, 1].legend(handles=legend_elements, loc='lower right')
 
