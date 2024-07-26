@@ -92,6 +92,8 @@ axes[1, 1].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', la
 axes[1, 1].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
 axes[1, 1].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
 axes[1, 1].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
+axes[1, 1].scatter(s_class_1_covariate[:, 0], s_class_1_covariate[:, 1], marker='^', color='red', label='Class 1 (Covariate Shift)')
+axes[1, 1].scatter(s_class_2_covariate[:, 0], s_class_2_covariate[:, 1], marker='^', color='blue', label='Class 2 (Covariate Shift)')
 axes[1, 1].set_title('Dual Augmentation')
 axes[1, 1].legend(handles=legend_elements, loc='lower right')
 
