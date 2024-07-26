@@ -16,7 +16,7 @@ axes[0].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', labe
 
 np.random.seed(42)
 t_class_1 = np.random.multivariate_normal([2, 2], [[1, 0], [0, 1]], 75) + [8, 0]
-t_class_2 = np.random.multivariate_normal([-2, -2], [[1, 0], [0, 1]], 75) + [8, 0]
+t_class_2 = np.random.multivariate_normal([-2, -2], [[1, 0], [0, 1]], 75) + [10, -2]
 axes[0].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
 axes[0].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
 
