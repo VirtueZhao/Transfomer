@@ -81,7 +81,7 @@ np.random.seed(826)
 s_class_1_conditional = s_class_1 + np.random.normal(0, 0.75, s_class_1.shape)
 s_class_2_conditional = s_class_2 + np.random.normal(0, 0.75, s_class_2.shape)
 s_class_1_conditional = s_class_1_conditional + [1.5, 1]
-s_class_2_conditional = s_class_2_conditional + [3, -1]
+s_class_2_conditional = s_class_2_conditional + [2, -1]
 axes[1, 0].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
 axes[1, 0].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
 axes[1, 0].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
@@ -120,6 +120,15 @@ axes[1, 1].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', l
 axes[1, 1].scatter(s_class_1_covariate[:, 0], s_class_1_covariate[:, 1], marker='^', color='red', label='Class 1 (Covariate Shift)')
 axes[1, 1].scatter(s_class_2_covariate[:, 0], s_class_2_covariate[:, 1], marker='^', color='blue', label='Class 2 (Covariate Shift)')
 axes[1, 1].set_title('Dual Augmentation')
+
+legend_elements = [
+    Line2D([0], [0], marker='s', color='w', markerfacecolor='red', markersize=10, label='Class 1'),
+    Line2D([0], [0], marker='s', color='w', markerfacecolor='blue', markersize=10, label='Class 2'),
+    Line2D([0], [0], marker='.', color='w', markerfacecolor='black', markersize=10, label='Source'),
+    Line2D([0], [0], marker='*', color='w', markerfacecolor='black', markersize=10, label='Target'),
+    Line2D([0], [0], marker='^', color='w', markerfacecolor='black', markersize=10, label='CovAug'),
+    Line2D([0], [0], marker='X', color='w', markerfacecolor='black', markersize=10, label='ConAug'),
+]
 axes[1, 1].legend(handles=legend_elements, loc='lower right')
 
 plt.show()
