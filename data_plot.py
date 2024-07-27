@@ -47,7 +47,7 @@ axes[0, 0].legend(handles=legend_elements, loc='lower right')
 s_class_1_covariate = s_class_1 + np.random.normal(0, 0.75, s_class_1.shape)
 s_class_2_covariate = s_class_2 + np.random.normal(0, 0.75, s_class_2.shape)
 # s_class_1_covariate = s_class_1_covariate + [1, 0]
-s_class_2_covariate = s_class_2_covariate + [1, 0]
+s_class_2_covariate = s_class_2_covariate + [1, -1]
 axes[0, 1].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
 axes[0, 1].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
 axes[0, 1].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', label='Class 1 (Target)')
@@ -109,9 +109,6 @@ legend_elements = [
 ]
 axes[1, 0].legend(handles=legend_elements, loc='lower right')
 
-
-
-
 # Covariate and Conditional Distribution Shift
 axes[1, 1].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
 axes[1, 1].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
@@ -119,8 +116,20 @@ axes[1, 1].scatter(t_class_1[:, 0], t_class_1[:, 1], color='red', marker='*', la
 axes[1, 1].scatter(t_class_2[:, 0], t_class_2[:, 1], color='blue', marker='*', label='Class 2 (Target)')
 axes[1, 1].scatter(s_class_1_covariate[:, 0], s_class_1_covariate[:, 1], marker='^', color='red', label='Class 1 (Covariate Shift)')
 axes[1, 1].scatter(s_class_2_covariate[:, 0], s_class_2_covariate[:, 1], marker='^', color='blue', label='Class 2 (Covariate Shift)')
-axes[1, 1].set_title('Dual Augmentation')
+axes[1, 1].scatter(s_class_1_conditional[:, 0], s_class_1_conditional[:, 1], color='red', marker='X', label='Class 1 (Conditional Shift)')
+axes[1, 1].scatter(s_class_2_conditional[:, 0], s_class_2_conditional[:, 1], color='blue', marker='X', label='Class 2 (Conditional Shift)')
 
+x = np.vstack((s_class_1, s_class_1_covariate, s_class_1_conditional, s_class_2, s_class_2_covariate, s_class_2_conditional))
+y = np.hstack((np.ones(num_data * 3), np.zeros(num_data * 3)))
+clf = LogisticRegression()
+clf.fit(x, y)
+all_data = np.vstack((s_class_1, s_class_1_covariate, s_class_1_conditional, s_class_2, s_class_2_covariate, s_class_2_conditional, t_class_1, t_class_2))
+x_min, x_max = all_data[:, 0].min() - 1, all_data[:, 0].max() + 1
+y_min, y_max = all_data[:, 1].min() - 1, all_data[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1), np.arange(y_min, y_max, 0.1))
+z = clf.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+axes[1, 1].contourf(xx, yy, z, alpha=0.3, cmap=plt.cm.Paired)
+axes[1, 1].set_title('Dual Augmentation')
 legend_elements = [
     Line2D([0], [0], marker='s', color='w', markerfacecolor='red', markersize=10, label='Class 1'),
     Line2D([0], [0], marker='s', color='w', markerfacecolor='blue', markersize=10, label='Class 2'),
