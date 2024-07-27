@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from sklearn.linear_model import LogisticRegression
 
-num_data = 75
+num_data = 50
 
 # Plot in the requested style
 fig, axes = plt.subplots(2, 2, figsize=(12, 12))
@@ -147,3 +147,4 @@ for ax in axes.flat:
 plt.tight_layout()
 plt.show()
 plt.savefig("plot.png")
+plt.savefig("plot.pdf")
