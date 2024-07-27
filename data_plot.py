@@ -140,5 +140,10 @@ legend_elements = [
 ]
 axes[1, 1].legend(handles=legend_elements, loc='lower right')
 
+for ax in axes.flat:
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+plt.tight_layout()
 plt.show()
 plt.savefig("plot.png")
