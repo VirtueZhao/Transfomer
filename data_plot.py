@@ -46,7 +46,7 @@ axes[0, 0].legend(handles=legend_elements, loc='lower right')
 # Simulate covariate shift by adding some noise
 s_class_1_covariate = s_class_1 + np.random.normal(0, 0.75, s_class_1.shape)
 s_class_2_covariate = s_class_2 + np.random.normal(0, 0.75, s_class_2.shape)
-# s_class_1_covariate = s_class_1_covariate + [1, 0]
+s_class_1_covariate = s_class_1_covariate + [-0.5, 0.5]
 s_class_2_covariate = s_class_2_covariate + [1, -1]
 axes[0, 1].scatter(s_class_1[:, 0], s_class_1[:, 1], color='red', marker='.', label='Class 1 (Source)')
 axes[0, 1].scatter(s_class_2[:, 0], s_class_2[:, 1], color='blue', marker='.', label='Class 2 (Source)')
